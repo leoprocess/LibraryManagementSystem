@@ -1,0 +1,43 @@
+﻿@model IEnumerable<LibraryManagementSystem.Models.Category>
+
+@{
+    ViewData["Title"] = "分類列表";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">加入新分類</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>分類名稱</th>
+            <th>父級分類</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.CategoryName</td>
+                <td>
+                    @if (category.ParentCategoryId.HasValue)
+                    {
+                        @category.ParentCategoryName
+                    }
+                    else
+                    {
+                        <em>無</em>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@category.CategoryId" class="btn btn-warning btn-sm">編輯</a>
+                    <a asp-action="Delete" asp-route-id="@category.CategoryId" class="btn btn-danger btn-sm">刪除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

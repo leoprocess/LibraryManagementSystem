@@ -1,0 +1,42 @@
+﻿@model LibraryManagementSystem.Models.Book
+
+@{
+    ViewData["Title"] = "詳細資訊";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>@Model.Title</h4>
+    <div>
+        <strong>作者：</strong> @Model.Author
+    </div>
+    <div>
+        <strong>ISBN：</strong> @Model.ISBN
+    </div>
+    <div>
+        <strong>分類：</strong> @Model.CategoryName
+    </div>
+    <div>
+        <strong>出版日期：</strong> @Model.PublicationDate?.ToString("yyyy-MM-dd")
+    </div>
+    <div>
+        <strong>簡介：</strong> @Model.Description
+    </div>
+    <div>
+        <strong>封面圖片：</strong><br />
+        @if (!string.IsNullOrEmpty(Model.CoverImagePath))
+        {
+            <img src="@Model.CoverImagePath" alt="封面圖片" style="max-height:200px;" />
+        }
+        else
+        {
+            <p>無封面圖片</p>
+        }
+    </div>
+</div>
+
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.BookId" class="btn btn-warning">編輯</a>
+    <a asp-action="Index" class="btn btn-secondary">返回</a>
+</p>

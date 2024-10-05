@@ -1,0 +1,41 @@
+﻿@model IEnumerable<LibraryManagementSystem.Models.Book>
+
+@{
+    ViewData["Title"] = "書本列表";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">加入新書</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>書名</th>
+            <th>作者</th>
+            <th>ISBN</th>
+            <th>分類</th>
+            <th>出版日期</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.ISBN</td>
+                <td>@book.CategoryName</td>
+                <td>@book.PublicationDate?.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@book.BookId" class="btn btn-info btn-sm">詳細</a>
+                    <a asp-action="Edit" asp-route-id="@book.BookId" class="btn btn-warning btn-sm">編輯</a>
+                    <a asp-action="Delete" asp-route-id="@book.BookId" class="btn btn-danger btn-sm">刪除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
